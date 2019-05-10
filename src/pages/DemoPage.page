@@ -1,0 +1,18 @@
+<apex:page sidebar="false" 
+     standardStylesheets="false"
+    showHeader="false">
+<script src="https://na50.salesforce.com/soap/ajax/32.0/connection.js" type="text/javascript"/>
+<script src="https://na50.salesforce.com/soap/ajax/32.0/apex.js" type="text/javascript"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+    <script>
+  
+    $(document).ready(function() {
+    var sessId = "{!$Api.Session_ID}";
+    var user = sforce.connection.getUserInfo();
+    console.log('id is'+sessId+'and user info is'+user);
+    });
+   
+    </script>
+
+</apex:page>

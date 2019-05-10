@@ -1,0 +1,103 @@
+<apex:page sidebar="false" standardStylesheets="false">
+    <!-- CSS Files -->
+    <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <!-- Javascript lib -->
+    <script
+        src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js" />
+    <script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <div class="ADT-SLDS outBoundAppClass"
+        xmlns:xlink="http://www.w3.org/1999/xlink" ng-app="outBoundApp"
+        ng-controller="MainCtrl">
+        <div class="panel panel-primary">
+            <div class="panel panel-heading">Selection Criteria</div>
+            <form name="outBoundCriteriaTable">
+                <div class="panel-body" style="padding: 0px">
+                   <table class="table table-striped table-bordered" style="margin: 0">
+                        <thead>
+                            <th>#</th>
+                            <th>Object</th>
+                            <th>Criteria Field</th>
+                        </thead> 
+                        <tr ng-repeat="r in rows">
+                            <td>{{$index+1}}</td>
+                            <td> 
+                            <select ng-model="r.selectedObjectRowData" ng-change="objectChange(r)"
+                                ng-options="option.objectName.fieldLabel for option in items"
+                                class="slds-select box" >
+                                    <option value=""></option>
+                            </select></td>
+                             <td><select ng-model="r.selectedFieldRowData"
+                                ng-options=" option.fieldLabel for option in r.selectedObjectRowData.objectFields"
+                                class="slds-select box" >
+                                    <option value=""></option>
+                            </select></td>
+                           <!-- <td><select ng-model="r.selectedOperatorRowData"                            
+                                ng-options="option.fieldLabelfor option in r.selectedFieldRowData.operators"
+                                class="slds-select box hideOutlineClass" required="required">
+                                    <option value=""></option>
+                            </select></td> -->
+                        </tr>
+                    </table> 
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+    var jQ = $.noConflict();
+    var app = angular.module('outBoundApp', []);
+    app
+        .controller(
+            'MainCtrl',
+            [
+                '$scope',
+                '$templateCache',
+                '$http',
+                '$filter',
+                function($scope, $templateCache, $http, $filter) {
+                    $scope.rows = [ {}];
+                    $scope.objectChange = function(r){
+                    console.log(r);
+                    }
+            $scope.items = [ 
+    {
+        "objectName":{"fieldLabel":"Account","apiName":"Account__c"},
+        "objectFields": [
+        {"fieldLabel":"Account-1","apiName":"Account1__c"},
+        {"fieldLabel":"Account-2","apiName":"Account2__c"}
+        ],
+        "operators":[
+        {"fieldLabel":"Accoperator-1","apiName":"Accoperator__c"},
+        {"fieldLabel":"Accoperator-2","apiName":"Accoperator__c"}
+        ]
+    },
+    {
+        "objectName":{"fieldLabel":"Dispotion","apiName":"Disposition__c"},
+        "objectFields": [
+        {"fieldLabel":"Dispo-1","apiName":"Dispo1__c"},
+        {"fieldLabel":"Dispo-2","apiName":"Dispo2__c"}
+        ],
+         "operators":[
+        {"fieldLabel":"Disoperator-1","apiName":"Disoperator__c"},
+        {"fieldLabel":"Disoperator-2","apiName":"Disoperator__c"}
+        ]
+    },
+    {
+        "objectName":{"fieldLabel":"Call Data","apiName":"Call_Data__c"},
+        "objectFields": [
+        {"fieldLabel":"Call Data 1","apiName":"Call_Data_1__c"},
+        {"fieldLabel":"Call Data 2","apiName":"Call_Data_2__c"}
+        ],
+        "operators":[
+        {"fieldLabel":"Calloperator-1","apiName":"Calloperator__c"},
+        {"fieldLabel":"Calloperator-2","apiName":"Calloperator__c"}
+        ]
+    }
+    ];
+                    
+                } ]);
+</script>
+</apex:page>

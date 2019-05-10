@@ -1,0 +1,45 @@
+<apex:page >
+    <!-- CSS Files -->
+    <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <!-- Javascript lib -->
+    <script
+        src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js" />
+    <script
+        src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <div ng-app="plunker" ng-controller="MainCtrl"> Make:
+    <select ng-model="makeng" ng-options="option.value as option.display for option in makes">
+        <option ng-disabled="true"  ng-selected="true" value="">Select a make</option>
+    </select>
+  <br /> <br /> <br /> 
+  
+  Model:
+    <select ng-model="modelng" ng-options="option.display for option in models | filter:{make:makeng}">
+        <option ng-disabled="true"  ng-selected="true" value="">Select a model</option>
+    </select>
+    </div>
+  <script>
+  var app = angular.module('plunker', []);
+
+app.controller('MainCtrl', function($scope) {
+    $scope.models = [
+      {"fieldLabel":"Account-1","apiName":"Account1__c"},
+        {"fieldLabel":"Account-2","apiName":"Account2__c"},
+          {"fieldLabel":"Dispo-1","apiName":"Dispo1__c"},
+        {"fieldLabel":"Dispo-2","apiName":"Dispo2__c"},
+        {"fieldLabel":"Calloperator-1","apiName":"Calloperator__c"},
+        {"fieldLabel":"Calloperator-2","apiName":"Calloperator__c"}
+        
+    ];
+    $scope.makes = [
+      {"value":"TOYO","display":"TOYOTA"},
+      {"value":"CHEV","display":"CHEVROLET"},
+      {"value":"JEEP","display":"JEEP"},
+      {"value":"AEROM","display":"AEROMAX"},
+      {"value":"FORD","display":"FORD"}
+    ];
+});
+
+  </script>
+</apex:page>
